@@ -22,10 +22,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={inter.className}>
         <div className="bg-slate-100  min-h-screen">
-
-           <AuthContextProvider>
-            {children}
-          </AuthContextProvider>
+          <AuthContextProvider>{children}</AuthContextProvider>
         </div>
       </body>
     </html>

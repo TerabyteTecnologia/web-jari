@@ -5,15 +5,15 @@ import logo from '../../../public/image/logo.png'
 import { DropdownMenu } from '../dropdown'
 import Link from 'next/link'
 import { deleteTokenLocalStorage } from '@/utils/LocalStorage'
-import { useRouter } from 'next/navigation';
-import { FiLogOut } from "react-icons/fi";
+import { useRouter } from 'next/navigation'
+import { FiLogOut } from 'react-icons/fi'
 export function Header() {
-    const router = useRouter();
-    const logout = () => {
-        deleteTokenLocalStorage();
-    
-        router.push("/auth");
-      }
+  const router = useRouter()
+  const logout = () => {
+    deleteTokenLocalStorage()
+
+    router.push('/auth')
+  }
   return (
     <nav className="flex bg-sky-600 items-center justify-between pl-6  h-32 mb-14">
       <div>
@@ -24,7 +24,7 @@ export function Header() {
           className=" bg-white m-0 shadow-lg  mb-1 p-1 rounded-b-lg absolute top-0 border-spacing-3 hover:drop-shadow-x border-b-2"
         />
         <h1 className="invisible sm:visible font-bold text-2xl ml-36 text-white">
-          <span className=" text-2xl">JARI</span> 
+          <span className=" text-2xl">JARI</span>
         </h1>
       </div>
 
@@ -38,10 +38,13 @@ export function Header() {
             <Link className="text-white text-lg mr-4" href="/lista">
               Lista Adm
             </Link>
-           
-            <div className='flex items-center justify-center cursor-pointer' onClick={() => logout()}><FiLogOut size={21} color="#fff" /> </div>
-    
-            
+
+            <div
+              className="flex items-center justify-center cursor-pointer"
+              onClick={() => logout()}
+            >
+              <FiLogOut size={21} color="#fff" />{' '}
+            </div>
           </div>
         </div>
       </div>

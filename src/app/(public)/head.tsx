@@ -1,7 +1,7 @@
-export default function Head () {
-    return (
-        <>
-            <title>JARI ALFENAS</title>
-        </>
-    );
+export default function Head() {
+  return (
+    <>
+      <title>JARI ALFENAS</title>
+    </>
+  )
 }

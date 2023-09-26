@@ -1,118 +1,133 @@
-"use client"
-import {useState,useEffect,ChangeEvent} from 'react'
+'use client'
+import { useState, useEffect, ChangeEvent } from 'react'
 
-import { useRouter } from "next/navigation";
-import { FormData } from '../interface';
-import { useAuth } from "@/context/auth";  
+import { useRouter } from 'next/navigation'
+import { FormData } from '../interface'
+import { useAuth } from '@/context/auth'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-export default function Login(){
+export default function Login() {
+  const [formData, setFormData] = useState<FormData>({
+    email: '',
+    password: '',
+  })
 
+  const { isAuthentication, authentication, isLoading } = useAuth()
+  const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
+  useEffect(() => {
+    console.log('enrouu no udessfefaf', isAuthentication)
+    if (isAuthentication) {
+      setLoading(false)
+      router.push('/cadastro')
+    }
+    setLoading(false)
+  }, [isAuthentication])
 
-    const [formData, setFormData] = useState<FormData>({
-        email: '',
-        password: ''
-      });
-    
-      const {isAuthentication, authentication, isLoading} = useAuth();
-     const [loading,setLoading] = useState(true)
-      const router = useRouter();
-   
-   
-      useEffect(() => {
-         console.log('enrouu no udessfefaf',isAuthentication)
-        if (isAuthentication){
-          setLoading(false)
-          router.push("/cadastro");
-        }
-         setLoading(false)
-      }, [isAuthentication]);
-    
-      const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [name]: value,
-        }));
-      };
-    
-      async function handleSubmit(e:any) {
-         e.preventDefault()
-        const dataLogin = {
-          "email": formData.email,
-          "password": formData.password
-        };
-        setLoading(false)
-        authentication(dataLogin);
-      
-      }
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }))
+  }
 
-    return(
-      <>
-      {(loading) ? 
+  async function handleSubmit(e: any) {
+    e.preventDefault()
+    const dataLogin = {
+      email: formData.email,
+      password: formData.password,
+    }
+    setLoading(false)
+    authentication(dataLogin)
+  }
+
+  return (
+    <>
+      {loading ? (
         <div className="d-flex-column g-10 over-auto">
-        <Skeleton width="100%" height="230px" />
-        <Skeleton width="100%" height="230px" />
-        <Skeleton width="100%" height="230px" />
+          <Skeleton width="100%" height="230px" />
+          <Skeleton width="100%" height="230px" />
+          <Skeleton width="100%" height="230px" />
         </div>
-       : 
+      ) : (
         <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-            <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-            JARI ADM    
+          <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <a
+              href="#"
+              className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+            >
+              <img
+                className="w-8 h-8 mr-2"
+                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+                alt="logo"
+              />
+              JARI ADM
             </a>
-      <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+              <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Entre na sua conta
-              </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                </h1>
+                <form
+                  className="space-y-4 md:space-y-6"
+                  onSubmit={handleSubmit}
+                >
                   <div>
-                      <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu email</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Seu e-mail de cadastro"
-                        value={formData.email}
-                        onChange={handleChange}
-                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                        
-                          />
+                    <label
+                      htmlFor="email"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Seu email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Seu e-mail de cadastro"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
                   </div>
                   <div>
-                      <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Senha</label>
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="••••••••" 
-                        value={formData.password}
-                        onChange={handleChange}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          />
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Senha
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="••••••••"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
                   </div>
                   <div className="flex items-center justify-between">
-                  
-                      <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Esqueceu a senha?</a>
+                    <a
+                      href="#"
+                      className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    >
+                      Esqueceu a senha?
+                    </a>
                   </div>
                   <button
-             
-                   type="submit"  
-                 
-                   className="w-full text-black bg-slate-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                   >
+                    type="submit"
+                    className="w-full text-black bg-slate-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  >
                     Acessar
                   </button>
-                  
-              </form>
+                </form>
+              </div>
+            </div>
           </div>
-      </div>
-  </div>
         </section>
-      }
-      </>
-    )
+      )}
+    </>
+  )
 }

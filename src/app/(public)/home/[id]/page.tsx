@@ -1,21 +1,16 @@
-"use client"
-import { ListNotifyOpen } from "@/app/api/notify/route";
-import { TableList } from "@/components/table";
-import { useEffect, useState } from "react";
+'use client'
+import { ListNotifyOpen } from '@/app/api/notify/route'
+import { TableList } from '@/components/table'
+import { useEffect, useState } from 'react'
 
 interface homeProps {
-  params:{
-    id:string
+  params: {
+    id: string
   }
 }
-export default  function Home({params}:homeProps){
-  const head =[
-    'Data',
-    'ID',
-    'DESCRIÇÂO',
-    'BAIXAR',
-  ]
-  const [data,setData] = useState<any[]>([])
+export default function Home({ params }: homeProps) {
+  const head = ['Data', 'ID', 'DESCRIÇÂO', 'BAIXAR']
+  const [data, setData] = useState<any[]>([])
   // const data =[
   //  {
   //   data:'02/01/1985',
@@ -39,18 +34,13 @@ export default  function Home({params}:homeProps){
   //  },
   // ]
 
-  async function  dataPrenche(){
-      const dataOld = await  ListNotifyOpen(params.id)
-      setData(dataOld)
-  } 
-  useEffect(() =>{
-  
+  async function dataPrenche() {
+    const dataOld = await ListNotifyOpen(params.id)
+    setData(dataOld)
+  }
+  useEffect(() => {
     dataPrenche()
-  },[])
- 
+  }, [])
 
-    return(
-   
-        <TableList head={head} data={data}/>
-    )
+  return <TableList head={head} data={data} />
 }

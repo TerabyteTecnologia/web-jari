@@ -14,8 +14,11 @@ export function Header() {
           priority
           className=" bg-white m-0 shadow-lg  mb-1 p-1 rounded-b-lg absolute top-0 border-spacing-3 hover:drop-shadow-x border-b-2"
         />
-        <Link className="invisible sm:visible font-bold text-2xl ml-36 text-white" href='/'>
-          <span className=" text-2xl">JARI</span> 
+        <Link
+          className="invisible sm:visible font-bold text-2xl ml-36 text-white"
+          href="/"
+        >
+          <span className=" text-2xl">JARI</span>
         </Link>
       </div>
 
@@ -26,7 +29,6 @@ export function Header() {
             <Link className="text-white text-lg mr-4" href="/">
               Consultas
             </Link>
-          
           </div>
         </div>
       </div>

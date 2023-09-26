@@ -1,5 +1,4 @@
-export interface ITipo{
-    id:number,
-    descricao:string,
-
+export interface ITipo {
+  id: number
+  descricao: string
 }
