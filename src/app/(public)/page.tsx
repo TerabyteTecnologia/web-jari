@@ -17,6 +17,12 @@ export default function Home() {
   }, [])
   return (
     <main className="flex flex-col m-4 ">
+        <a href="http://jariantigo.alfenas.mg.gov.br" target='_blank'>
+          <div className="flex items-center justify-between  bg-blue-600 flex-1 rounded-md pl-4 pr-4 mb-8 ">
+            <h1 className="text-white font-bold  p-6">Clique aqui para consultas anteriores ao dia 05/10/2023</h1>
+            <BiArrowToRight size={30} color="#fafafa" />
+          </div>
+       </a>
       {data.map((tipo) => (
         <ListInfra key={tipo.id} nome={tipo.descricao} id={tipo.id} />
       ))}
